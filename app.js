@@ -11,7 +11,14 @@ document.getElementById('get_btn').addEventListener('click', async function(e) {
     let post = await req.json()
     output += `
       <h5>${post.title}</h5>
-      <p>${post.body}</p>`
+      <p>${post.body}</p>
+      <h6>Comments</h6>`
+    
+    let req2 = await fetch(`https://jsonplaceholder.typicode.com/posts/${i}/comments`)
+    let comments = await req2.json()
+    comments.forEach(comment => {
+      output += `<small class="mb-2">${comment.email}</small>`
+    });
     }
   document.getElementById('container').innerHTML = output;
 })
